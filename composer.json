@@ -1,0 +1,31 @@
+{
+  "name": "ism/workshop",
+  "description": "Workshop extension",
+  "version": "v1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "valantic CEC Deutschland GmbH"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "RDD\\Lab1\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": ">=6.4.0"
+  },
+  "extra": {
+    "shopware-plugin-class": "RDD\\Lab1\\RDDLab1",
+    "label": {
+      "de-DE": "Workshop extension",
+      "en-GB": "Workshop extension"
+    },
+    "description": {
+      "de-DE": "Workshop extension",
+      "en-GB": "Workshop extension"
+    }
+  }
+}

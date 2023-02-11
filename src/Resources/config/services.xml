@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Business -->
+        <service id="RDD\Lab1\Components\HashService\Business\Model\HashServiceHandler">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="user_lab.repository"/>
+        </service>
+
+        <!-- Communication -->
+        <service id="RDD\Lab1\Components\Command\UserCreateCommand">
+            <argument type="service" id="RDD\Lab1\Components\HashService\Business\Model\HashServiceHandler"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <!-- Definition -->
+        <service id="RDD\Lab1\Components\Persistence\Definition\UserLab\UserLabDefinition">
+            <tag name="shopware.entity.definition" entity="user_lab"/>
+        </service>
+
+    </services>
+</container>
