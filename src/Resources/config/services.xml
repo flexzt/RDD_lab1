@@ -12,9 +12,20 @@
             <argument type="service" id="user_lab.repository"/>
         </service>
 
+        <service id="RDD\Lab1\Components\HashService\Business\Model\Rsa">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="user_lab.repository"/>
+        </service>
+
         <!-- Communication -->
         <service id="RDD\Lab1\Components\Command\UserCreateCommand">
             <argument type="service" id="RDD\Lab1\Components\HashService\Business\Model\HashServiceHandler"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="RDD\Lab1\Components\Command\RsaCommand">
+            <argument type="service" id="RDD\Lab1\Components\HashService\Business\Model\Rsa"/>
 
             <tag name="console.command"/>
         </service>
