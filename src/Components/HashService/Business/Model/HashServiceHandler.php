@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RDD\Lab1\Components\HashService\Business\Model;
 
 use Doctrine\DBAL\Connection;
+use RDD\Lab1\Components\Persistence\Definition\UserLab\UserLabEntity;
 use Shopware\Core\Defaults;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\Util\Random;
@@ -36,7 +37,7 @@ class HashServiceHandler implements HashServiceHandlerInterface
             'last_name'  => $additionalData['lastName'] ?? $username,
             'email'      => $additionalData['email'] ?? '',
             'username'   => $username,
-            'password'   => md5($password . $salt),
+            'password'   => $this->getHash($password, $salt),
             'active'     => true,
             'created_at' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
         ];
@@ -44,6 +45,16 @@ class HashServiceHandler implements HashServiceHandlerInterface
         $this->connection->insert('user_lab', $userPayload);
 
         return $password;
+    }
+
+    public function validate(UserLabEntity $userLabEntity, string $password): bool
+    {
+        return $this->getHash($password, $userLabEntity->getId()) === $userLabEntity->getPassword();
+    }
+
+    private function getHash($password, $salt): string
+    {
+        return md5($password . $salt);
     }
 
     private function userExists(string $username): bool

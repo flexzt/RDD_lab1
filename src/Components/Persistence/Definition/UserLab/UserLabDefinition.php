@@ -9,7 +9,6 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityProtection\EntityProtectionCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityProtection\WriteProtection;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\DateTimeField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
@@ -17,10 +16,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\SearchRanking;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\PasswordField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\TimeZoneField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use Shopware\Core\System\User\UserCollection;
-use Shopware\Core\System\User\UserEntity;
 
 class UserLabDefinition extends EntityDefinition
 {
@@ -33,12 +29,12 @@ class UserLabDefinition extends EntityDefinition
 
     public function getCollectionClass(): string
     {
-        return UserCollection::class;
+        return UserLabCollection::class;
     }
 
     public function getEntityClass(): string
     {
-        return UserEntity::class;
+        return UserLabEntity::class;
     }
 
     public function since(): ?string
@@ -82,15 +78,11 @@ class UserLabDefinition extends EntityDefinition
                         SearchRanking::HIGH_SEARCH_RANKING
                     )
                 ),
-                (new StringField('title', 'title'))->addFlags(new SearchRanking(SearchRanking::MIDDLE_SEARCH_RANKING)),
-                (new StringField('email', 'email'))->addFlags(
+                 (new StringField('email', 'email'))->addFlags(
                     new Required(),
                     new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)
                 ),
-                new BoolField('active', 'active'),
-                new BoolField('admin', 'admin'),
-                new DateTimeField('last_updated_password_at', 'lastUpdatedPasswordAt'),
-                (new TimeZoneField('time_zone', 'timeZone'))->addFlags(new Required()),
+                new BoolField('active', 'active')
             ]
         );
     }

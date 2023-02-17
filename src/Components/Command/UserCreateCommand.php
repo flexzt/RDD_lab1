@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace RDD\Lab1\Components\Command;
 
 use RDD\Lab1\Components\HashService\Business\Model\HashServiceHandlerInterface;
-use RDD\Lab1\Components\HashService\Business\Model\Rsa;
 use Shopware\Core\Framework\Adapter\Console\ShopwareStyle;
-use Shopware\Core\Maintenance\User\Service\UserProvisioner;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,12 +24,12 @@ class UserCreateCommand extends Command
 
     protected function configure(): void
     {
-//        $this
-//            ->addArgument('username', InputArgument::REQUIRED, 'Username for the user')
-//            ->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Password for the user')
-//            ->addOption('firstName', null, InputOption::VALUE_REQUIRED, 'The user\'s firstname')
-//            ->addOption('lastName', null, InputOption::VALUE_REQUIRED, 'The user\'s lastname')
-//            ->addOption('email', null, InputOption::VALUE_REQUIRED, 'E-Mail for the user');
+        $this
+            ->addArgument('username', InputArgument::REQUIRED, 'Username for the user')
+            ->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Password for the user')
+            ->addOption('firstName', null, InputOption::VALUE_REQUIRED, 'The user\'s firstname')
+            ->addOption('lastName', null, InputOption::VALUE_REQUIRED, 'The user\'s lastname')
+            ->addOption('email', null, InputOption::VALUE_REQUIRED, 'E-Mail for the user');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
