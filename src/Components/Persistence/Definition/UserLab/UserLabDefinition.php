@@ -65,7 +65,7 @@ class UserLabDefinition extends EntityDefinition
                         SearchRanking::HIGH_SEARCH_RANKING
                     )
                 ),
-                (new PasswordField('password', 'password'))->removeFlag(ApiAware::class)->addFlags(new Required()),
+                (new StringField('password', 'password'))->removeFlag(ApiAware::class)->addFlags(new Required()),
                 (new StringField('first_name', 'firstName'))->addFlags(
                     new Required(),
                     new SearchRanking(

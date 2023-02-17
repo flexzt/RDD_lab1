@@ -52,6 +52,8 @@ class HashServiceHandler implements HashServiceHandlerInterface
         return $this->getHash($password, $userLabEntity->getId()) === $userLabEntity->getPassword();
     }
 
+    //3ed3803c69b74d95a128787194fa9670
+
     private function getHash($password, $salt): string
     {
         return md5($password . $salt);

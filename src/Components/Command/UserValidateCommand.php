@@ -39,7 +39,7 @@ class UserValidateCommand extends Command
         $searchResult = $this->userLabRepository->search($criteria, Context::createDefaultContext());
 
         if (!$searchResult->getEntities()->count()) {
-            $io->success(sprintf('User "%s" is not valid.', $email));
+            $io->error(sprintf('User "%s" is not valid.', $email));
 
             return self::FAILURE;
         }
@@ -50,10 +50,12 @@ class UserValidateCommand extends Command
         $validated = $this->hashServiceHandler->validate($searchResult->getEntities()->first(), $password);
 
         if (!$validated) {
-            $io->success(sprintf('User "%s" is not valid.', $email));
+            $io->error(sprintf('User "%s" is not valid.', $email));
+
+            return self::FAILURE;
         }
 
-        $io->success(sprintf('User "%s" is not valid.', $email));
+        $io->success(sprintf('User "%s" is valid.', $email));
 
         return self::SUCCESS;
     }
