@@ -15,7 +15,8 @@
     }
   },
   "require": {
-    "shopware/core": ">=6.4.0"
+    "shopware/core": ">=6.4.0",
+    "ext-bcmath": "*"
   },
   "extra": {
     "shopware-plugin-class": "RDD\\Lab1\\RDDLab1",
